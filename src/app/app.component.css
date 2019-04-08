@@ -1,0 +1,17 @@
+nav{
+    background-color: rgb(236, 236, 236);
+}
+
+body{
+    background-color: oldlace;
+}
+
+footer{
+    background-color: black;
+    color: white;
+    text-align: center;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
