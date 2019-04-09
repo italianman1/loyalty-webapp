@@ -21,7 +21,7 @@ export class HttpService {
     this.headers.append('Accept', 'application/json');
 }
 
-  getAll(namespace: string): Observable<User[]> {
+  getAll(namespace: string): Observable<Type[]> {
     console.log(`${this.actionUrl}` + namespace);
     return this.http.get(`${this.actionUrl}` + namespace)
       .map(this.extractData)
