@@ -1,3 +1,30 @@
-<p>
-  loyalty-providers works!
-</p>
+<div class="row">
+  <div class="col-12">
+      <button type="button" class="btn btn-outline-success">Add provider</button>
+  </div>
+</div>
+
+<div class="row">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Name</th>
+        <th scope="col">Partners</th>
+        <th scope="col">Amount of tokens</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let provider of allProviders">
+        <th scope="row">{{ provider.userId }}</th>
+        <td>{{ provider.companyName }}</td>
+        <td>{{ provider.allPartners}}</td>
+        <td>{{ provider.loyaltyTokens}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="row">
+  <p class=""></p>
+</div>

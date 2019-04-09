@@ -15,3 +15,7 @@ footer{
     bottom: 0;
     width: 100%;
 }
+
+#userList{
+    margin-right: 80px;
+}
