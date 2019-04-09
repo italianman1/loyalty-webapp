@@ -11,7 +11,7 @@ export class LoyaltyProvidersComponent implements OnInit {
   private errorMessage;
   allProviders: Array<LoyaltyProvider> = [];
 
-  constructor(private httpService: HttpService) { 
+  constructor(private httpService: HttpService) {
     this.getAllProviders();
   }
 
@@ -28,12 +28,11 @@ export class LoyaltyProvidersComponent implements OnInit {
         tempList.push(user);
       });
       this.allProviders = tempList;
-    }
-    catch (error) {
+      console.log(this.allProviders);
+    } catch (error) {
       if (error === 'Server error') {
         this.errorMessage = 'Could not connect to REST server. Please check your configuration details';
-      }
-      else if (error === '404 - Not Found') {
+      } else if (error === '404 - Not Found') {
         this.errorMessage = '404 - Could not find API route. Please check your available APIs.';
         this.errorMessage = error;
       }
