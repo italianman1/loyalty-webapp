@@ -5,21 +5,27 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpService } from './services/http.service';
 import { HttpModule } from '@angular/http';
-import { LoyaltyProvidersComponent } from './loyalty-providers/loyalty-providers.component';
+import { LoyaltyProvidersComponent } from './loyalty-provider-components/loyalty-providers/loyalty-providers.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { HomeComponent } from './home/home.component';
+import { LoyaltyProviderModule } from './loyalty-provider-components/loyalty-providers/loyalty-provider.module';
+import { AddLoyaltyProviderComponent } from './loyalty-provider-components/add-loyalty-provider/add-loyalty-provider.component';
+import { FormsModule }   from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoyaltyProvidersComponent,
     PagenotfoundComponent,
-    HomeComponent
+    HomeComponent,
+    AddLoyaltyProviderComponent
   ],
   imports: [
     BrowserModule,
+    HttpModule,
+    LoyaltyProviderModule,
     AppRoutingModule,
-    HttpModule
+    FormsModule
   ],
   providers: [HttpService],
   bootstrap: [AppComponent]

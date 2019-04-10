@@ -9,7 +9,7 @@ import { User } from '../models/loyaltynetwork';
 @Injectable({
   providedIn: 'root'
 })
-export class HttpService {
+export class HttpService<Type> {
 
   private headers: Headers;
   private actionUrl: string;
@@ -34,12 +34,23 @@ export class HttpService {
     .catch(this.handleError);
   }
 
-  updateSingleInstance(namespace: string, id: string) {
-    return this.http.get(`${this.actionUrl}` + namespace)
+  addSingleInstance(namespace: string, asset: Type): Observable<Type>{
+    return this.http.post(`${this.actionUrl}` + namespace, asset)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  updateSingleInstance(namespace: string, id: string, itemToUpdate: Type) {
+    return this.http.get(`${this.actionUrl}${namespace}/${id}`, itemToUpdate)
     .map(this.extractData)
     .catch(this.handleError);
   }
 
+  deleteSingleInstance(namespace: string, id: string,): Observable<Type>{
+    return this.http.delete(`${this.actionUrl}${namespace}/${id}`)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
 
   private handleError(error: any): Observable<string> {
     // In a real world app, we might use a remote logging infrastructure

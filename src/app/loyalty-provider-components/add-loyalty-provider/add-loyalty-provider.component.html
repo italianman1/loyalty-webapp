@@ -1,0 +1,21 @@
+<div class="container">
+  <form (ngSubmit)="onSubmit(companyName.value, companyEmail.value)" #addProvider="ngForm">
+    <div class="form-group">
+      <label for="name">Company name</label>
+      <input type="text" class="form-control" id="name" required name="name" #companyName>
+      <div [hidden]="validName" class="alert alert-danger">
+        Company name is required
+      </div>
+    </div>
+
+    <div class="form-group">
+        <label for="name">Company email</label>
+        <input type="email" class="form-control" id="email" required name="email" #companyEmail>
+        <div [hidden]="validEmail" class="alert alert-danger">
+          Email is required
+        </div>
+      </div>
+    <button type="submit" class="btn btn-success" [disabled]="!addProvider.form.valid">Submit</button>
+    <button (click)="goBack()" class="btn btn-primary">Go back</button>
+  </form>
+</div>
