@@ -13,7 +13,7 @@ export class LoyaltyProvidersComponent implements OnInit {
   allProviders: Array<LoyaltyProvider> = [];
 
   constructor(private loyaltyProviderService: LoyaltyproviderService) {
-
+    this.getProviders();
   }
 
   ngOnInit() {
