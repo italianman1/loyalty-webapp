@@ -24,7 +24,7 @@ export class LoyaltyproviderService {
     return this.httpService.updateSingleInstance(this.category, instance.userId, instance);
   }
   
-  deleteProvider(instance: LoyaltyProvider): Observable<LoyaltyProvider> {
-    return this.httpService.addSingleInstance(this.category, instance);
+  deleteProvider(id: string): Observable<LoyaltyProvider> {
+    return this.httpService.deleteSingleInstance(this.category, id);
   }
 }

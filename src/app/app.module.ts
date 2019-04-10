@@ -10,7 +10,7 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { HomeComponent } from './home/home.component';
 import { LoyaltyProviderModule } from './loyalty-provider-components/loyalty-providers/loyalty-provider.module';
 import { AddLoyaltyProviderComponent } from './loyalty-provider-components/add-loyalty-provider/add-loyalty-provider.component';
-import { FormsModule }   from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -25,7 +25,8 @@ import { FormsModule }   from '@angular/forms';
     HttpModule,
     LoyaltyProviderModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [HttpService],
   bootstrap: [AppComponent]

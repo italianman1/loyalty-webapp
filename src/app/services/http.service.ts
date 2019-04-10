@@ -34,7 +34,7 @@ export class HttpService<Type> {
     .catch(this.handleError);
   }
 
-  addSingleInstance(namespace: string, asset: Type): Observable<Type>{
+  addSingleInstance(namespace: string, asset: Type): Observable<Type> {
     return this.http.post(`${this.actionUrl}` + namespace, asset)
       .map(this.extractData)
       .catch(this.handleError);

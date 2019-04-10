@@ -17,7 +17,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let provider of allProviders">
+      <tr *ngFor="let provider of allProviders | async">
         <th scope="row">{{ provider.userId }}</th>
         <td>{{ provider.companyName }}</td>
         <td>{{ provider.partners.length}}</td>
