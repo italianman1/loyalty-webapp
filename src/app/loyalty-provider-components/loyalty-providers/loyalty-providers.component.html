@@ -1,7 +1,6 @@
 <div class="row">
   <div class="col-12">
-      <a href="loyalty-provider/add"><button type="button" class="btn btn-outline-success">Add provider</button></a>
-      <button type="button" class="btn btn-outline-primary">Update provider</button>
+      <a href="/loyalty-provider/add"><button type="button" class="btn btn-outline-success">Add provider</button></a>
   </div>
 </div>
 
@@ -14,6 +13,8 @@
         <th scope="col">Amount of partners</th>
         <th scope="col">Amount of customers</th>
         <th scope="col">Amount of tokens</th>
+        <th></th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -23,6 +24,8 @@
         <td>{{ provider.partners.length}}</td>
         <td>{{ provider.customers.length}}</td>
         <td>{{ provider.tokens.length}}</td>
+        <a href="/loyalty-provider/{{provider.userId}}/edit"><button type="button" class="btn btn-outline-primary">Update provider</button></a>
+        <a href="/loyalty-provider/{{provider.userId}}/delete"><button type="button" class="btn btn-outline-primary">Update provider</button></a>
       </tr>
     </tbody>
   </table>

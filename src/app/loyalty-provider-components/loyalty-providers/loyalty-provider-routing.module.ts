@@ -6,6 +6,7 @@ import { AddLoyaltyProviderComponent } from '../add-loyalty-provider/add-loyalty
 const routes: Routes = [
   { path: 'loyalty-provider', component: LoyaltyProvidersComponent },
   { path: 'loyalty-provider/add', component: AddLoyaltyProviderComponent},
+  { path: 'loyalty-provider/:providerId/edit', component: AddLoyaltyProviderComponent},
 ];
 
 @NgModule({

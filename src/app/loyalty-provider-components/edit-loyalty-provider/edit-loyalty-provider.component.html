@@ -1,0 +1,23 @@
+<div class="container">
+    <h1>Provider form</h1>
+    <form (ngSubmit)="onSubmit()" #editProvider="ngForm">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" required name="name" [(ngModel)]="providerToEdit.companyName" #providerName="ngModel">
+        <div [hidden]="providerToEdit.name" class="alert alert-danger">
+          Name is required
+        </div>
+      </div>
+
+      <div class="form-group">
+          <label for="name">Email</label>
+          <input type="text" class="form-control" id="email" required name="email" [(ngModel)]="providerToEdit.email" #providerName="ngModel">
+          <div [hidden]="providerToEdit.email" class="alert alert-danger">
+            Email is required
+          </div>
+      </div>
+
+      <button type="submit" class="btn btn-success" [disabled]="!editProvider.form.valid">Submit</button>
+      <button (click)="goBack()" class="btn btn-primary ml-2">Go back</button>
+    </form>
+  

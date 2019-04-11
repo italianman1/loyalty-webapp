@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../../services/http.service';
 import { User, LoyaltyProvider } from '../../models/loyaltynetwork';
 import { LoyaltyproviderService } from 'src/app/services/loyaltyprovider.service';
+import { tick } from '@angular/core/testing';
 
 @Component({
   selector: 'app-loyalty-providers',
@@ -23,6 +24,10 @@ export class LoyaltyProvidersComponent implements OnInit {
     this.loyaltyProviderService.getAllProviders().subscribe(providers => {
       this.allProviders = providers;
     });
+  }
+
+  deleteProvider(id: string){
+    this.loyaltyProviderService.deleteProvider(id);
   }
 
  
