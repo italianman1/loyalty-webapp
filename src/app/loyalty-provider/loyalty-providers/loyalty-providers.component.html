@@ -18,14 +18,14 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let provider of allProviders">
+      <tr *ngFor="let provider of allProviders | async">
         <th scope="row">{{ provider.userId }}</th>
         <td>{{ provider.companyName }}</td>
         <td>{{ provider.partners.length}}</td>
         <td>{{ provider.customers.length}}</td>
         <td>{{ provider.tokens.length}}</td>
-        <a href="/loyalty-provider/{{provider.userId}}/edit"><button type="button" class="btn btn-outline-primary">Update provider</button></a>
-        <button type="button" (click)="deleteProvider(provider.userId)" class="btn btn-outline-danger">Delete provider</button></a>
+        <td><a href="/loyalty-provider/{{provider.userId}}/edit"><button type="button" class="btn btn-outline-primary">Update provider</button></a></td>
+        <td><button type="button" (click)="deleteProvider(provider.userId)" class="btn btn-outline-danger">Delete provider</button></td>
       </tr>
     </tbody>
   </table>

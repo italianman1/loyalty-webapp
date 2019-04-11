@@ -29,7 +29,7 @@ export class HttpService<Type> {
   }
 
   getSingleInstance(namespace: string, id: string) {
-    return this.http.get(`${this.actionUrl}` + namespace)
+    return this.http.get(`${this.actionUrl}${namespace}/${id}`)
     .map(this.extractData)
     .catch(this.handleError);
   }
@@ -40,14 +40,14 @@ export class HttpService<Type> {
       .catch(this.handleError);
   }
 
-  updateSingleInstance(namespace: string, id: string, itemToUpdate: Type) {
-    return this.http.get(`${this.actionUrl}${namespace}/${id}`, itemToUpdate)
+  updateSingleInstance(namespace: string, id: string, itemToUpdate: Type): Observable<Type> {
+    return this.http.put(this.actionUrl + namespace + '/' + id, itemToUpdate)
     .map(this.extractData)
     .catch(this.handleError);
   }
 
-  deleteSingleInstance(namespace: string, id: string,): Observable<Type>{
-    return this.http.delete(`${this.actionUrl}${namespace}/${id}`)
+  deleteSingleInstance(namespace: string, id: string): Observable<Type> {
+    return this.http.delete(this.actionUrl + namespace + '/' + id)
       .map(this.extractData)
       .catch(this.handleError);
   }

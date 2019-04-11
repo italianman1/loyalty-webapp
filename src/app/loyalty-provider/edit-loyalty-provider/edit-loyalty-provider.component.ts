@@ -12,12 +12,22 @@ import { Location } from '@angular/common';
 export class EditLoyaltyProviderComponent implements OnInit {
   providerToEdit: LoyaltyProvider = new LoyaltyProvider();
   providerId: string;
+  errorMessage: string;
 
   constructor(private loyaltyProviderService: LoyaltyproviderService, private route: ActivatedRoute, private router: Router, private location: Location) { 
     this.providerId = this.route.snapshot.paramMap.get('providerId').valueOf();
-    this.loyaltyProviderService.getProvider(this.providerId).subscribe(provider => {
-      this.providerToEdit = provider;
+    this.loyaltyProviderService.getProvider(this.providerId)
+    .toPromise()
+    .then(result => {
+      this.providerToEdit = result;
     })
+    .catch((error) => {
+      if (error === 'Server error') {
+        this.errorMessage = 'Could not connect to REST server. Please check your configuration details';
+      } else {
+        this.errorMessage = error;
+      }
+    });
   }
 
   ngOnInit() {
@@ -25,8 +35,19 @@ export class EditLoyaltyProviderComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.loyaltyProviderService.updateProvider(this.providerToEdit);
-    this.router.navigateByUrl('loyalty-provider');
+    this.loyaltyProviderService.updateProvider(this.providerToEdit)
+    .toPromise()
+    .then(() => {
+      this.router.navigateByUrl('loyalty-provider');
+    })
+    .catch((error) => {
+      if (error === 'Server error') {
+        this.errorMessage = 'Could not connect to REST server. Please check your configuration details';
+      } else {
+        this.errorMessage = error;
+      }
+    });
+   
   }
 
   goBack(): void {
