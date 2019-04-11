@@ -25,7 +25,7 @@
         <td>{{ provider.customers.length}}</td>
         <td>{{ provider.tokens.length}}</td>
         <a href="/loyalty-provider/{{provider.userId}}/edit"><button type="button" class="btn btn-outline-primary">Update provider</button></a>
-        <a href="/loyalty-provider/{{provider.userId}}/delete"><button type="button" class="btn btn-outline-primary">Update provider</button></a>
+        <button type="button" (click)="deleteProvider(provider.userId)" class="btn btn-outline-danger">Delete provider</button></a>
       </tr>
     </tbody>
   </table>

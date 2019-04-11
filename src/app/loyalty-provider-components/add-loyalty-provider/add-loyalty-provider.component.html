@@ -2,7 +2,7 @@
   <form (ngSubmit)="onSubmit(companyName.value, companyEmail.value)" #addProvider="ngForm">
     <div class="form-group">
       <label for="name">Company name</label>
-      <input type="text" class="form-control" id="name" required name="name" #companyName>
+      <input type="text" class="form-control" id="companyName" required name="companyName" #companyName>
       <div [hidden]="validName" class="alert alert-danger">
         Company name is required
       </div>
@@ -10,7 +10,7 @@
 
     <div class="form-group">
         <label for="name">Company email</label>
-        <input type="email" class="form-control" id="email" required name="email" #companyEmail>
+        <input type="text" class="form-control" id="companyEmail" required name="companyEmail" #companyEmail>
         <div [hidden]="validEmail" class="alert alert-danger">
           Email is required
         </div>

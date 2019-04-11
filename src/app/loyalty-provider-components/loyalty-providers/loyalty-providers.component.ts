@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../../services/http.service';
 import { User, LoyaltyProvider } from '../../models/loyaltynetwork';
 import { LoyaltyproviderService } from 'src/app/services/loyaltyprovider.service';
-import { tick } from '@angular/core/testing';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-loyalty-providers',
@@ -11,7 +11,7 @@ import { tick } from '@angular/core/testing';
 })
 export class LoyaltyProvidersComponent implements OnInit {
   private errorMessage;
-  allProviders: Array<LoyaltyProvider> = [];
+  allProviders: Observable<LoyaltyProvider[]>;
 
   constructor(private loyaltyProviderService: LoyaltyproviderService) {
     this.getProviders();
@@ -20,10 +20,8 @@ export class LoyaltyProvidersComponent implements OnInit {
   ngOnInit() {
   }
 
-  getProviders(){
-    this.loyaltyProviderService.getAllProviders().subscribe(providers => {
-      this.allProviders = providers;
-    });
+  getProviders() {
+    this.allProviders = this.loyaltyProviderService.getAllProviders();
   }
 
   deleteProvider(id: string){

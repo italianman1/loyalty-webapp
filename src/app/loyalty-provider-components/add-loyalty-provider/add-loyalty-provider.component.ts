@@ -10,35 +10,53 @@ import {Location} from '@angular/common';
   styleUrls: ['./add-loyalty-provider.component.css']
 })
 export class AddLoyaltyProviderComponent implements OnInit {
-  providerModel = new LoyaltyProvider();
-  validName: boolean = true;
-  validType: boolean = true;
+  provider;
+  validName = true;
+  validType = true;
+  errorMessage;
 
-  constructor(private router: Router, private location: Location, private route: ActivatedRoute, private loyaltyProviderService: LoyaltyproviderService) { }
+  constructor(private router: Router, private location: Location,
+              private route: ActivatedRoute, private loyaltyProviderService: LoyaltyproviderService) { }
 
   ngOnInit() {
-   
+
   }
 
-  onSubmit(companyName, email): void {
-      this.providerModel.userId = name + Math.floor(Math.random() * 100).toString();
-      this.providerModel.role = "Provider";
-      this.providerModel.email = email;
-      this.providerModel.companyName = companyName;
-      this.providerModel.partners = [];
-      this.providerModel.customers = [];
-      this.providerModel.tokens = [];
-      
-    if (name && email && name != '') {
-      this.loyaltyProviderService.addProvider(this.providerModel);
-      this.router.navigateByUrl('loyalty-provider');
-    }
+  onSubmit(companyName, companyEmail): void {
 
-    if (name == '') {
+      this.provider = {
+        $class: 'loyaltynetwork.LoyaltyProvider',
+        companyName: companyName,
+        partners: [],
+        customers: [],
+        userId: companyName + Math.floor(Math.random() * 100).toString(),
+        email: companyEmail,
+        role: 'Provider',
+        tokens: []
+      };
+
+      console.log(this.provider);
+
+      if (companyName && companyEmail && companyName !== '') {
+      this.loyaltyProviderService.addProvider(this.provider)
+      .toPromise()
+      .then(() => {
+      this.router.navigateByUrl('loyalty-provider');
+      })
+      .catch((error) => {
+        if (error === 'Server error') {
+          this.errorMessage = 'Could not connect to REST server. Please check your configuration details';
+        } else {
+          this.errorMessage = error;
+        }
+      });
+
+      }
+
+      if (companyName === '') {
       this.router.navigateByUrl('loyalty-provider/add');
       this.validName = false;
-    }
-
+      }
   }
 
   goBack(): void {
