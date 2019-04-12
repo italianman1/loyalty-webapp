@@ -12,7 +12,7 @@ import {Location} from '@angular/common';
 export class AddLoyaltyProviderComponent implements OnInit {
   provider;
   validName = true;
-  validType = true;
+  validEmail = true;
   errorMessage;
 
   constructor(private router: Router, private location: Location,
@@ -22,7 +22,7 @@ export class AddLoyaltyProviderComponent implements OnInit {
 
   }
 
-  onSubmit(companyName, companyEmail): void {
+  onSubmit(companyName, companyEmail, ConversionRate): void {
 
       this.provider = {
         $class: 'loyaltynetwork.LoyaltyProvider',
@@ -32,7 +32,8 @@ export class AddLoyaltyProviderComponent implements OnInit {
         userId: companyName + Math.floor(Math.random() * 100).toString(),
         email: companyEmail,
         role: 'Provider',
-        tokens: []
+        tokens: [],
+        conversionRate: ConversionRate,
       };
 
       console.log(this.provider);

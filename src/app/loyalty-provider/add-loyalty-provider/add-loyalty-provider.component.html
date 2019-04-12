@@ -1,5 +1,5 @@
 <div class="container">
-  <form (ngSubmit)="onSubmit(companyName.value, companyEmail.value)" #addProvider="ngForm">
+  <form (ngSubmit)="onSubmit(companyName.value, companyEmail.value, conversion_rate.value)" #addProvider="ngForm">
     <div class="form-group">
       <label for="name">Company name</label>
       <input type="text" class="form-control" id="companyName" required name="companyName" #companyName>
@@ -14,7 +14,13 @@
         <div [hidden]="validEmail" class="alert alert-danger">
           Email is required
         </div>
-      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="conversion_rate">Conversion rate</label>
+      <input type="number" class="form-control" id="conversion_rate" required name="conversion_rate" #conversion_rate>
+    </div>
+
     <button type="submit" class="btn btn-success" [disabled]="!addProvider.form.valid">Submit</button>
     <button (click)="goBack()" class="btn btn-primary ml-2">Go back</button>
   </form>

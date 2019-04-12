@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LoyaltyProvidersComponent } from './loyalty-provider-components/loyalty-providers/loyalty-providers.component';
+import { LoyaltyProvidersComponent } from './loyalty-provider/loyalty-providers/loyalty-providers.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { HomeComponent } from './home/home.component';
 

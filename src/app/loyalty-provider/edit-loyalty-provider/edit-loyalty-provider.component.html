@@ -17,6 +17,11 @@
           </div>
       </div>
 
+      <div class="form-group">
+        <label for="conversion_rate">Email</label>
+        <input type="number" class="form-control" id="conversion_rate" required name="conversion_rate" [(ngModel)]="providerToEdit.conversionRate" #providerConversionRate="ngModel">
+      </div>
+
       <button type="submit" class="btn btn-success" [disabled]="!editProvider.form.valid">Submit</button>
       <button (click)="goBack()" class="btn btn-primary ml-2">Go back</button>
     </form>
