@@ -14,9 +14,7 @@ export class LoyaltyProvidersComponent implements OnInit {
   private errorMessage;
   allProviders: Observable<LoyaltyProvider[]>;
 
-  constructor(private loyaltyProviderService: LoyaltyproviderService, private router: Router) {
-    
-  }
+  constructor(private loyaltyProviderService: LoyaltyproviderService, private router: Router){ }
 
   ngOnInit() {
     this.getProviders();

@@ -1,0 +1,37 @@
+<div class="container">
+  <form (ngSubmit)="onSubmit()" #addCustomer="ngForm">
+    <div class="form-group">
+      <label for="first_name">First name </label>
+      <input type="text" class="form-control" id="first_name" required name="first_name" [(ngModel)]="customerToAdd.firstName" #customerfurstName="ngModel">
+      <div [hidden]="customerToAdd.firstName" class="alert alert-danger">
+        Firstname is required
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="last_name">Last name </label>
+      <input type="text" class="form-control" id="last_name" required name="last_name" [(ngModel)]="customerToAdd.lastName" #customerlastName="ngModel">
+      <div [hidden]="customerToAdd.lastName" class="alert alert-danger">
+        Lastname is required
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email </label>
+      <input type="text" class="form-control" id="email" required name="email" [(ngModel)]="customerToAdd.email" #customerEmail="ngModel">
+      <div [hidden]="customerToAdd.email" class="alert alert-danger">
+        Lastname is required
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Which provider you would like to join?</label>
+      <select [(ngModel)]="selectedProvider" #customerProvider="ngModel">
+        <option *ngFor="let provider of providers" [value]="provider">{{provider.companyName}}</option>
+      </select>
+    </div>
+    
+    <button type="submit" class="btn btn-success" [disabled]="!addCustomer.form.valid">Submit</button>
+    <button (click)="goBack()" class="btn btn-primary ml-2">Go back</button>
+  </form>
+</div>
