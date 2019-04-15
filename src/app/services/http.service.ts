@@ -5,6 +5,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { Type } from '@angular/compiler';
 import { User } from '../models/loyaltynetwork';
+import { throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -58,7 +59,7 @@ export class HttpService<Type> {
     const errMsg = (error.message) ? error.message :
       error.status ? `${error.status} - ${error.statusText}` : 'Server error';
     console.error(errMsg); // log to console instead
-    return Observable.throw(errMsg);
+    return throwError(errMsg);
 }
 
   private extractData(res: Response): any {

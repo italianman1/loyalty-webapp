@@ -10,37 +10,46 @@ import { Router } from '@angular/router';
   styleUrls: ['./join-program.component.css']
 })
 export class JoinProgramComponent implements OnInit {
-  private providers: LoyaltyProvider[];
-  private selectedProvider: LoyaltyProvider;
-  private customerToAdd: Customer;
+  private providers: LoyaltyProvider[] = [];
+  private selectedProviderId;
+  private customerToAdd;
 
-  constructor(private providerService: LoyaltyproviderService, private customerService: CustomerService, private router: Router) { }
+  constructor(private providerService: LoyaltyproviderService, private customerService: CustomerService, private router: Router) {
+    this.customerToAdd = {
+      $class: 'loyaltynetwork.Customer',
+      firstName: '',
+      lastName: '',
+      providers: [],
+      userId: '',
+      email: '',
+      role: 'Customer',
+      tokens: []
+    };
+  }
 
   ngOnInit() {
     this.providerService.getAllProviders().subscribe(providers => {
       this.providers = providers;
     });
+
   }
 
   onSubmit() {
     this.customerToAdd.userId =  this.customerToAdd.lastName + Math.floor(Math.random() * 100).toString();
-    this.customerToAdd.providers.push(this.selectedProvider);
-    this.setCustomerValues();
+    this.customerToAdd.providers.push('resource:loyaltynetwork.LoyaltyProvider#' + this.selectedProviderId);
     this.customerService.addCustomer(this.customerToAdd)
     .toPromise()
     .then(() => {
-      this.selectedProvider.customers.push(this.customerToAdd);
-      this.providerService.updateProvider(this.selectedProvider)
-      .toPromise()
-      .then(() => {
-        this.router.navigateByUrl('/customers');
+      this.providers.forEach(provider => {
+        if (provider.userId === this.selectedProviderId) {
+          provider.customers.push('resource:loyaltynetwork.Customer#' + this.customerToAdd.userId);
+          this.providerService.updateProvider(provider)
+          .toPromise()
+          .then(() => {
+            this.router.navigateByUrl('/customers');
+          });
+        }
       });
     });
   }
-
-  setCustomerValues(){
-    this.customerToAdd.role = 'Customer';
-    this.customerToAdd.tokens = [];
-  }
-
 }

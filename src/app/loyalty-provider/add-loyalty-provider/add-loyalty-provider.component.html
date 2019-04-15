@@ -3,7 +3,7 @@
     <div class="form-group">
       <label for="name">Company name</label>
       <input type="text" class="form-control" id="companyName" required name="companyName" #companyName>
-      <div [hidden]="validName" class="alert alert-danger">
+      <div [hidden]="companyName" class="alert alert-danger">
         Company name is required
       </div>
     </div>
@@ -11,7 +11,7 @@
     <div class="form-group">
         <label for="name">Company email</label>
         <input type="text" class="form-control" id="companyEmail" required name="companyEmail" #companyEmail>
-        <div [hidden]="validEmail" class="alert alert-danger">
+        <div [hidden]="companyEmail" class="alert alert-danger">
           Email is required
         </div>
     </div>

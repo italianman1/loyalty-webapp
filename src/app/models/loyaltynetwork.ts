@@ -8,18 +8,18 @@ export abstract class User extends Participant {
     userId: string;
     email: string;
     role: string;
-    tokens: LoyaltyToken[];
+    tokens: LoyaltyToken[] = [];
 }
 export class Customer extends User {
     firstName: string;
     lastName: string;
-    providers: LoyaltyProvider[];
+    providers: LoyaltyProvider[] = [];
 }
 
 export class LoyaltyProvider extends User {
     companyName: string;
-    partners: LoyaltyPartner[];
-    customers: Customer[];
+    partners: LoyaltyPartner[] = [];
+    customers: string[] = [];
 }
 
 export class LoyaltyPartner extends User {
