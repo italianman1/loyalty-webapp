@@ -1,5 +1,6 @@
 <div class="container">
     <h1>Provider form</h1>
+  <div class="row">
     <form (ngSubmit)="onSubmit()" #editProvider="ngForm">
       <div class="form-group">
         <label for="name">Name</label>
@@ -25,5 +26,6 @@
       <button type="submit" class="btn btn-success" [disabled]="!editProvider.form.valid">Submit</button>
       <button (click)="goBack()" class="btn btn-primary ml-2">Go back</button>
     </form>
+  </div>
 </div>
   
