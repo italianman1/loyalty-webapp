@@ -11,14 +11,12 @@ import { LoyaltyProviderModule } from './loyalty-provider/loyalty-providers/loya
 import { RouterModule } from '@angular/router';
 import { CustomerRoutingModule } from './customer/customer-routing.module';
 import { CustomerModule } from './customer/customer.module';
-import { LoyaltyProgramOverviewComponent } from './customer/loyalty-program-overview/loyalty-program-overview.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PagenotfoundComponent,
     HomeComponent,
-    LoyaltyProgramOverviewComponent
   ],
   imports: [
     BrowserModule,
