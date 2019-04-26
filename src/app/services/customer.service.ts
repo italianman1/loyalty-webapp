@@ -18,6 +18,7 @@ export class CustomerService {
   getCustomer(id: string): Observable<Customer> {
     return this.httpService.getSingleInstance(this.category, id);
   }
+  
   addCustomer(instance: Customer): Observable<Customer> {
     return this.httpService.addSingleInstance(this.category, instance);
   }
