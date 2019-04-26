@@ -1,0 +1,14 @@
+<h1 class="text-center">Overview of points</h1>
+<div class="text-center">
+    <div class="d-flex justify-content-center">
+        <div class="card text-white bg-info mb-3" *ngFor="let data of pointsEarnedData" style="max-width: 18rem;">
+          <div class="card-header">{{ data.provider }}</div>
+          <div class="card-body">
+            <h5 class="card-title">Information: </h5>
+            <p class="card-text">Amount of points: {{ data.points }}</p>
+            <p class="card-text">In euros: {{ data.euros }}</p>
+          </div>
+        </div>
+      </div>
+</div>
+
