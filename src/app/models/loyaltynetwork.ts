@@ -13,13 +13,14 @@ export abstract class User extends Participant {
 export class Customer extends User {
     firstName: string;
     lastName: string;
-    providers: LoyaltyProvider[] = [];
+    providers: string[] = [];
 }
 
 export class LoyaltyProvider extends User {
     companyName: string;
     partners: LoyaltyPartner[] = [];
     customers: string[] = [];
+    conversionRate: number;
 }
 
 export class LoyaltyPartner extends User {
@@ -29,6 +30,7 @@ export class LoyaltyPartner extends User {
 export class LoyaltyToken extends Asset {
     tokenId: string;
     owner: User;
+    issuer: string;
 }
 export class issueTokens extends Transaction {
     issuer: User;
