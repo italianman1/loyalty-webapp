@@ -8,6 +8,7 @@ import { PointsEarnedBarChartComponent } from './points-earned-bar-chart/points-
 import { TokenOverviewComponent } from './token-overview/token-overview.component';
 import { PointsSpentBarChartComponent } from './points-spent-bar-chart/points-spent-bar-chart.component';
 import { PerformTransactionComponent } from './perform-transaction/perform-transaction.component';
+import { LoyaltyProgramOverviewComponent } from './loyalty-program-overview/loyalty-program-overview.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { PerformTransactionComponent } from './perform-transaction/perform-trans
     PointsEarnedBarChartComponent,
     PointsSpentBarChartComponent,
     PerformTransactionComponent,
+    LoyaltyProgramOverviewComponent
   ],
   imports: [
     CommonModule,
