@@ -1,0 +1,31 @@
+<div class="container">
+  <form (ngSubmit)="onSubmit()" #addpartner="ngForm">
+    <div class="form-group">
+      <label for="company_name">Company name </label>
+      <input type="text" class="form-control" id="company_name" required name="company_name" [(ngModel)]="partnerToAdd.companyName" #partnercompanyName="ngModel">
+      <div [hidden]="partnerToAdd.companyName" class="alert alert-danger">
+        companyName is required
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="email">Email </label>
+      <input type="text" class="form-control" id="email" required name="email" [(ngModel)]="partnerToAdd.email" #partnerEmail="ngModel">
+      <div [hidden]="partnerToAdd.email" class="alert alert-danger">
+        Email is required
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label>Which provider you would like to join?</label>
+      <select class="form-control" id="provider" required name="provider" [(ngModel)]="selectedProviderId" #partnerProvider="ngModel">
+        <option *ngFor="let provider of providers" [value]="provider.userId">{{provider.companyName}}</option>
+      </select>
+      <div [hidden]="selectedProviderId" class="alert alert-danger">
+      Provider is required
+      </div>
+    </div>
+    <button type="submit" class="btn btn-success" [disabled]="!addpartner.form.valid">Submit</button>
+    <button (click)="goBack()" class="btn btn-primary ml-2">Go back</button>
+  </form>
+</div>
