@@ -14,7 +14,8 @@ export class EditLoyaltyProviderComponent implements OnInit {
   providerId: string;
   errorMessage: string;
 
-  constructor(private loyaltyProviderService: LoyaltyproviderService, private route: ActivatedRoute, private router: Router, private location: Location) { 
+  constructor(private loyaltyProviderService: LoyaltyproviderService, private route: ActivatedRoute, 
+              private router: Router, private location: Location) {
     this.providerId = this.route.snapshot.paramMap.get('providerId').valueOf();
     this.loyaltyProviderService.getProvider(this.providerId)
     .toPromise()
