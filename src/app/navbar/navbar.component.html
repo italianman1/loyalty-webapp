@@ -1,0 +1,79 @@
+<nav class="navbar navbar-expand navbar-light flex-column flex-md-row bd-navbar">
+    <a class="navbar-brand" href="#">
+      <img src="./assets/images/ctac-logo.png" width="180" height="60" class="d-inline-block align-top" alt="">
+    </a>
+    <div class="navbar-nav-scroll" id="navbarNav">
+        <p *ngIf="!signedInUser" class="navbar-nav bd-navbar-nav flex-row">
+            wait for the signed in user to be retrieved...
+        </p>
+
+        <ul *ngIf="signedInUser.role == 'SolutionProvider'" class="navbar-nav bd-navbar-nav flex-row">
+          <li class="nav-item">
+            <a class="nav-link" href="loyalty-provider">Providers</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="transaction-overview">Transactions</a>
+          </li>
+        </ul>
+
+        <ul *ngIf="signedInUser.role == 'Customer'" class="navbar-nav bd-navbar-nav flex-row">
+            <li class="nav-item">
+              <a class="nav-link" href="customer/program-overview">Program overview</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="customer/join-program">Join program</a>
+            </li>
+            <li class="nav-item">
+                  <a class="nav-link" href="customer/perform-transaction">Perform transaction</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="customer/token-overview">Token overview</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="transaction-overview">Transactions</a>
+            </li>
+        </ul>
+
+        <ul *ngIf="signedInUser.role == 'Partner'" class="navbar-nav bd-navbar-nav flex-row">
+            <li class="nav-item">
+              <a class="nav-link" href="partner/join-program">Register for a program</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="transaction-overview">Transactions</a>
+            </li>
+        </ul>
+        <ul *ngIf="signedInUser.role == 'Provider'" class="navbar-nav bd-navbar-nav flex-row">
+            <li class="nav-item">
+              <a class="nav-link" href="loyalty-provider/partner-overview">Partner overview</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="loyalty-provider/registrations">Partner registrations</a>
+              </li>
+            <li class="nav-item">
+                <a class="nav-link" href="transaction-overview">Transactions</a>
+            </li>
+        </ul>
+        
+    </div>
+        <ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
+          <li id="userList" class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{ signedInUser.userId }}:
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <h5 class="dropdown-header">Solution provider(s)</h5>
+                <button *ngFor="let admin of allAdmins | async" class="dropdown-item" (click)="changeUser(admin.userId, admin.role)">{{ admin.userId }}</button>
+                <div class="dropdown-divider"></div>
+                <h5 class="dropdown-header">Customer(s)</h5>
+                <button *ngFor="let customer of allCustomers | async" class="dropdown-item" (click)="changeUser(customer.userId, customer.role)">{{ customer.firstName }} {{ customer.lastName }}</button>
+                <div class="dropdown-divider"></div>
+                <h5 class="dropdown-header">Partner(s)</h5>
+                <button *ngFor="let partner of allPartners | async" class="dropdown-item" (click)="changeUser(partner.userId, partner.role)">{{ partner.companyName }}</button>
+                <div class="dropdown-divider"></div>
+                <h5 class="dropdown-header">Provider(s)</h5>
+                <button *ngFor="let provider of allProviders | async" class="dropdown-item" (click)="changeUser(provider.userId, provider.role)">{{ provider.companyName }}</button>
+              </div>
+          </li>
+        </ul>
+
+</nav>
