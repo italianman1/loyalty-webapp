@@ -1,7 +1,3 @@
-nav{
-    background-color: rgb(236, 236, 236);
-}
-
 body{
     background-color: oldlace;
 }
@@ -14,8 +10,4 @@ footer{
     left: 0;
     bottom: 0;
     width: 100%;
-}
-
-#userList{
-    margin-right: 80px;
 }

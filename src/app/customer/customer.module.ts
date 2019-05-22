@@ -1,31 +1,25 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CustomerRoutingModule } from './customer-routing.module';
-import { CustomerListComponent } from './customer-list/customer-list.component';
-import { JoinProgramComponent } from './join-program/join-program.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { PointsEarnedBarChartComponent } from './points-earned-bar-chart/points-earned-bar-chart.component';
+import { JoinProgramComponent } from './join-program/join-program.component';
 import { TokenOverviewComponent } from './token-overview/token-overview.component';
-import { PointsSpentBarChartComponent } from './points-spent-bar-chart/points-spent-bar-chart.component';
-import { PerformTransactionComponent } from './perform-transaction/perform-transaction.component';
 import { LoyaltyProgramOverviewComponent } from './loyalty-program-overview/loyalty-program-overview.component';
+import { PerformTransactionComponent } from './perform-transaction/perform-transaction.component';
+import { RouterModule } from '@angular/router';
+
 
 @NgModule({
   declarations: [
-    CustomerListComponent,
     JoinProgramComponent,
+    LoyaltyProgramOverviewComponent,
     TokenOverviewComponent,
-    PointsEarnedBarChartComponent,
-    PointsSpentBarChartComponent,
-    PerformTransactionComponent,
-    LoyaltyProgramOverviewComponent
+    PerformTransactionComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    CustomerRoutingModule,
-
+    RouterModule,
   ]
 })
 export class CustomerModule { }
