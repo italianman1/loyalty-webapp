@@ -13,8 +13,8 @@
         <tr *ngFor="let provider of allProviders | async">
           <th scope="row">{{ provider.userId }} </th>
           <td>{{ provider.companyName }} </td>
-          <td>{{ provider.conversionRate}} </td>
-          <td *ngIf="checkIfJoined(provider)"><button type="button" (click)="deleteProvider(provider)" class="btn btn-outline-danger">Delete</button></td>
+          <td>{{ provider.conversionRate }} </td>
+          <td *ngIf="checkIfJoined(provider)"><button type="button" (click)="deleteProvider(provider)" class="btn btn-outline-danger">Leave</button></td>
           <td *ngIf="!checkIfJoined(provider)"><button type="button" (click)="joinProvider(provider)" class="btn btn-outline-success">Join</button></td>
         </tr>
       </tbody>

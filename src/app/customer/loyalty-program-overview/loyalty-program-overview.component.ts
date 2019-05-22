@@ -6,6 +6,7 @@ import { LoyaltyproviderService } from 'src/app/services/loyaltyprovider.service
 import { CustomerService } from 'src/app/services/customer.service';
 import { Router } from '@angular/router';
 import { TransactionService } from 'src/app/services/transaction.service';
+import { SessionService } from 'src/app/services/session.service';
 
 @Component({
   selector: 'app-loyalty-program-overview',
@@ -15,34 +16,32 @@ import { TransactionService } from 'src/app/services/transaction.service';
 export class LoyaltyProgramOverviewComponent implements OnInit {
   public allProviders: Observable<LoyaltyProvider[]>;
   private signedInCustomer;
-  public providersToJoin: LoyaltyProvider[] = [];
   private joinTransaction;
   private exitTransaction;
 
-  constructor(private loyaltyProviderService: LoyaltyproviderService, private customerService: CustomerService, private router: Router,
+  constructor(private loyaltyProviderService: LoyaltyproviderService, private sessionService: SessionService, private router: Router,
               private transactionService: TransactionService) { }
 
   ngOnInit() {
-    this.getCustomer();
-    this.getProviders();
+    this.getUser();
   }
 
   getProviders() {
     this.allProviders = this.loyaltyProviderService.getAllProviders();
   }
 
-  getCustomer() {
-    this.customerService.getCustomer('Henk1').subscribe(customer => {
-      this.signedInCustomer = customer;
+  getUser() {
+   this.sessionService.getSignedInUser()
+    .then(user => {
+      this.signedInCustomer = user;
+      this.getProviders();
     });
   }
 
   checkIfJoined(loyaltyProvider: LoyaltyProvider): boolean {
     let hasJoined = false;
     this.signedInCustomer.providers.forEach(provider => {
-        const userId: string = provider.split('#')[1];
-        const userId2: string = loyaltyProvider.userId;
-        if (userId === userId2) {
+        if (loyaltyProvider.userId === provider.userId) {
           hasJoined = true;
         }
       });
@@ -53,28 +52,28 @@ export class LoyaltyProgramOverviewComponent implements OnInit {
   joinProvider(loyaltyProvider: LoyaltyProvider) {
     this.joinTransaction = {
       $class: 'loyaltynetwork.joinProgram',
-      programOwner: 'resource:loyaltynetwork.LoyaltyProvider#' + loyaltyProvider.userId,
-      joiner: 'resource:loyaltynetwork.Customer#' + this.signedInCustomer.userId,
+      programOwner: 'resource:loyaltynetwork.LoyaltyProvider#' + encodeURI(loyaltyProvider.userId),
+      joiner: 'resource:loyaltynetwork.Customer#' + encodeURI(this.signedInCustomer.userId),
     };
 
     this.transactionService.joinProgram(this.joinTransaction)
     .toPromise()
     .then(() => {
-        this.router.navigateByUrl('home');
+        this.ngOnInit();
       });
   }
 
   deleteProvider(loyaltyProvider: LoyaltyProvider) {
     this.exitTransaction = {
       $class: 'loyaltynetwork.exitProgram',
-      programOwner: 'resource:loyaltynetwork.LoyaltyProvider#' + loyaltyProvider.userId,
-      exiter: 'resource:loyaltynetwork.Customer#' + this.signedInCustomer.userId,
+      programOwner: 'resource:loyaltynetwork.LoyaltyProvider#' + encodeURI(loyaltyProvider.userId),
+      exiter: 'resource:loyaltynetwork.Customer#' + encodeURI(this.signedInCustomer.userId),
     };
 
     this.transactionService.exitProgram(this.exitTransaction)
       .toPromise()
       .then(() => {
-        this.router.navigateByUrl('home');
+        this.ngOnInit();
       });
   }
 
