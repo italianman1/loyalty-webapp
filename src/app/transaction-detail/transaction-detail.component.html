@@ -1,0 +1,63 @@
+<div class="container" *ngIf="transactionType == 'earnTokens'">
+    <div class="card border-light mb-3" >
+        <div class="card-header">{{transaction.transactionId}}</div>
+        <div class="card-body">
+          <h5 class="card-title">Earn tokens</h5>
+          <p class="card-text">Earner:  {{ transaction.earner.firstName }} {{ transaction.earner.lastName }} </p>
+          <p class="card-text">Issuer:  {{ transaction.issuer.userId }}</p>
+          <p class="card-text">Earned Tokens:  {{ transaction.earnedTokens }}</p>
+        </div>
+    </div>
+    
+    <div class="row">
+        <button type="button" class="btn btn-outline-info" (click)="goBack()">Go back</button>
+    </div>
+</div>
+
+<div class="container" *ngIf="transactionType == 'redeemTokens'">
+    <div class="card border-light mb-3" >
+        <div class="card-header">{{transaction.transactionId}}</div>
+        <div class="card-body">
+          <h5 class="card-title">Redeem tokens</h5>
+          <p class="card-text">Redeemer:  {{ transaction.redeemer.firstName }} {{ transaction.redeemer.lastName }} </p>
+          <p class="card-text">Issuer:  {{ transaction.accepter.userId }}</p>
+          <p class="card-text">Redeemed Tokens:  {{ transaction.redeemedTokens }}</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <button type="button" class="btn btn-outline-info" (click)="goBack()">Go back</button>
+    </div>
+
+</div>
+
+<div class="container" *ngIf="transactionType == 'issueTokens'">
+    <div class="card border-light mb-3" >
+        <div class="card-header">{{transaction.transactionId}}</div>
+        <div class="card-body">
+          <h5 class="card-title">Issue tokens</h5>
+          <p class="card-text">Issuer:  {{ transaction.issuer.companyName }} </p>
+          <p class="card-text">Issued tokens:  {{ transaction.issuedTokens }}</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <button type="button" class="btn btn-outline-info" (click)="goBack()">Go back</button>
+    </div>
+</div>
+
+<div class="container" *ngIf="transactionType == 'tradeTokens'">
+    <div class="card border-light mb-3" >
+        <div class="card-header">{{transaction.transactionId}}</div>
+        <div class="card-body">
+          <h5 class="card-title">Trade tokens</h5>
+          <p class="card-text">Sender:  {{ transaction.sender.firstName }} {{ transaction.sender.lastName }} </p>
+          <p class="card-text">Receiver:  {{ transaction.receiver.firstName }} {{ transaction.receiver.lastName }} </p>
+          <p class="card-text">Traded Tokens:  {{ transaction.tradedTokens }}</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <button type="button" class="btn btn-outline-info" (click)="goBack()">Go back</button>
+    </div>
+</div>
