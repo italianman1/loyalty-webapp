@@ -19,8 +19,14 @@ export class Customer extends User {
 export class LoyaltyProvider extends User {
     companyName: string;
     partners: LoyaltyPartner[] = [];
+    registrations: LoyaltyPartner [] = [];
     customers: string[] = [];
     conversionRate: number;
+}
+
+export class SolutionProvider {
+    userId: string;
+    role: string;
 }
 
 export class LoyaltyPartner extends User {
