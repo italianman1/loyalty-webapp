@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpService } from './http.service';
 import { Observable } from 'rxjs';
 import { LoyaltyProvider } from '../models/loyaltynetwork';
+import { Type } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +13,12 @@ export class LoyaltyproviderService {
 
   constructor(private httpService: HttpService<LoyaltyProvider>) { }
 
-  getAllProviders(): Observable<LoyaltyProvider[]> {
-    return this.httpService.getAll(this.category);
+  getAllProviders(filter?: string): Observable<LoyaltyProvider[]> {
+    return this.httpService.getAll(this.category, filter);
   }
 
-  getProvider(id: string): Observable<LoyaltyProvider> {
-    return this.httpService.getSingleInstance(this.category, id);
+  getProvider(id: string, options?: string): Observable<LoyaltyProvider> {
+    return this.httpService.getSingleInstance(this.category, id, options);
   }
   
   addProvider(instance: LoyaltyProvider): Observable<LoyaltyProvider> {

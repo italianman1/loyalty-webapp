@@ -15,8 +15,8 @@ export class CustomerService {
     return this.httpService.getAll(this.category);
   }
 
-  getCustomer(id: string): Observable<Customer> {
-    return this.httpService.getSingleInstance(this.category, id);
+  getCustomer(id: string, filter?: string): Observable<Customer> {
+    return this.httpService.getSingleInstance(this.category, id, filter);
   }
   
   addCustomer(instance: Customer): Observable<Customer> {

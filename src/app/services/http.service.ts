@@ -22,21 +22,37 @@ export class HttpService<Type> {
     this.headers.append('Accept', 'application/json');
 }
 
-  getAll(namespace: string): Observable<Type[]> {
-    console.log(`${this.actionUrl}` + namespace);
-    return this.http.get(`${this.actionUrl}` + namespace)
+  getAll(namespace: string, filter?: string): Observable<Type[]> {
+    if (!filter) {
+      return this.http.get(`${this.actionUrl}` + namespace)
       .map(this.extractData)
       .catch(this.handleError);
+    }
+
+    if(filter) {
+      return this.http.get(`${this.actionUrl}${namespace}?filter=${filter}`)
+      .map(this.extractData)
+      .catch(this.handleError);
+    }
   }
 
-  getSingleInstance(namespace: string, id: string) {
-    return this.http.get(`${this.actionUrl}${namespace}/${id}`)
-    .map(this.extractData)
-    .catch(this.handleError);
+  getSingleInstance(namespace: string, id: string, filter?: string): Observable<Type> {
+    if (filter) {
+      return this.http.get(`${this.actionUrl}${namespace}/${id}?filter=${filter}`)
+      .map(this.extractData)
+      .catch(this.handleError);
+    }
+
+    if (!filter) {
+      console.log(`${this.actionUrl}${namespace}/${id}`);
+      return this.http.get(`${this.actionUrl}${namespace}/${id}`)
+      .map(this.extractData)
+      .catch(this.handleError);
+    }
   }
 
-  addSingleInstance(namespace: string, asset: Type): Observable<Type> {
-    return this.http.post(`${this.actionUrl}` + namespace, asset)
+  addSingleInstance(namespace: string, asset: Type, options?: Type): Observable<Type> {
+    return this.http.post(`${this.actionUrl}` + namespace, asset, options)
       .map(this.extractData)
       .catch(this.handleError);
   }
