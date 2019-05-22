@@ -1,0 +1,74 @@
+<div *ngIf="allTransactions.length > 0" class="container">
+  <div>
+    <div class="row">
+      <button type="button" class="btn btn-outline-info" (click)="goBack()">Go back</button>
+    </div>
+    <div class="row">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Type</th>
+            <th scope="col">Involved customer</th>
+            <th scope="col">Involved partner/provider</th>
+            <th scope="col">Tokens involved</th>
+            <th scope="col">Amount of euros/discount</th>
+            <th scope="col">Datetime</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let transaction of allTransactions">
+          <tr *ngIf="transaction.$class.split('.')[1] == 'earnTokens'">
+            <th scope="row">{{ transaction.$class.split('.')[1] }} </th>
+            <td>{{ transaction.earner.firstName}} {{ transaction.earner.lastName}} </td>
+            <td>{{ transaction.issuer.userId}} </td>
+            <td> nvt </td>
+            <td><p class="text-success"> {{ transaction.amountOfEuros}} </p></td>
+            <td>{{ transaction.timestamp}} </td>
+            <td><button type="button" (click)="detailTransaction(transaction)" class="btn btn-outline-info">Bekijk transactie</button></td>
+          </tr>
+
+          <tr *ngIf="transaction.$class.split('.')[1] == 'redeemTokens'">
+              <th scope="row">{{ transaction.$class.split('.')[1] }} </th>
+              <td>{{ transaction.redeemer.firstName}} {{ transaction.redeemer.lastName}} </td>
+              <td>{{ transaction.accepter.userId}} </td>
+              <td> nvt </td>
+              <td><p class="text-danger">{{ transaction.amountOfDiscount}} </p></td>
+              <td>{{ transaction.timestamp}} </td>
+              <td><button type="button" (click)="detailTransaction(transaction)" class="btn btn-outline-info">Bekijk transactie</button></td>
+          </tr>
+
+          <tr *ngIf="transaction.$class.split('.')[1] == 'tradeTokens'">
+              <th scope="row">{{ transaction.$class.split('.')[1] }} </th>
+              <td *ngIf="signedInUser.userId == 'transaction.sender.userId'">{{ transaction.receiver.firstName}} {{ transaction.receiver.lastName}} </td>
+              <td *ngIf="signedInUser.userId == 'transaction.receiver.userId'">{{ transaction.sender.firstName}} {{ transaction.sender.lastName}} </td>
+              <td> nvt </td>
+              <td *ngIf="signedInUser.userId == 'transaction.sender.userId'"><p class="text-danger"> {{ transaction.tradedTokens }} </p></td>
+              <td *ngIf="signedInUser.userId == 'transaction.receiver.userId'"><p class="text-success"> {{ transaction.tradedTokens }} </p></td>
+              <td>{{ transaction.timestamp}} </td>
+              <td><button type="button" (click)="detailTransaction(transaction)" class="btn btn-outline-info">Bekijk transactie</button></td>
+          </tr>
+
+          <tr *ngIf="transaction.$class.split('.')[1] == 'issueTokens'">
+              <th scope="row">{{ transaction.$class.split('.')[1] }} </th>
+              <td> nvt </td>
+              <td>{{ transaction.issuer.companyName}} </td>
+              <td>{{ transaction.issuedTokens}} </td>
+              <td><p class="text-danger"> {{ transaction.amountOfEuros}} </p></td>
+              <td>{{ transaction.timestamp}} </td>
+              <td><button type="button" (click)="detailTransaction(transaction)" class="btn btn-outline-info">Bekijk transactie</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="allTransactions.length == 0" class="container">
+  <div class="row">
+    <p>Wait a minute to load... If there are still no transactions press the button beneath </p>
+  </div>
+  <div class="row">
+    <button type="button" class="btn btn-outline-info" (click)="goBack()">Go back</button>
+  </div>
+</div>
+
