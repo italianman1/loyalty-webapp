@@ -4,6 +4,7 @@ import { LoyaltyProvider, Customer } from 'src/app/models/loyaltynetwork';
 import { CustomerService } from 'src/app/services/customer.service';
 import { Router } from '@angular/router';
 import { TransactionService } from '../../services/transaction.service';
+import { SessionService } from 'src/app/services/session.service';
 
 @Component({
   selector: 'app-join-program',
@@ -17,7 +18,7 @@ export class JoinProgramComponent implements OnInit {
   private addTransaction;
 
   constructor(private providerService: LoyaltyproviderService, private customerService: CustomerService, private router: Router,
-              private transactionService: TransactionService) {
+              private transactionService: TransactionService, private sessionService: SessionService) {
     this.customerToAdd = {
       $class: 'loyaltynetwork.Customer',
       firstName: '',
@@ -44,17 +45,17 @@ export class JoinProgramComponent implements OnInit {
     .then(() => {
       this.providers.forEach(provider => {
         if (provider.userId === this.selectedProviderId) {
-
           this.addTransaction = {
             $class: 'loyaltynetwork.joinProgram',
-            programOwner: 'resource:loyaltynetwork.LoyaltyProvider#' + this.selectedProviderId,
-            joiner: 'resource:loyaltynetwork.Customer#' + this.customerToAdd.userId
+            programOwner: 'resource:loyaltynetwork.LoyaltyProvider#' + encodeURI(this.selectedProviderId),
+            joiner: 'resource:loyaltynetwork.Customer#' + encodeURI(this.customerToAdd.userId)
           };
 
           this.transactionService.joinProgram(this.addTransaction)
           .toPromise()
           .then(() => {
-            this.router.navigateByUrl('/customer/program-overview');
+            this.sessionService.setSignedInUser(this.customerToAdd.userId, this.customerToAdd.role);
+            this.router.navigateByUrl('/home');
           });
         }
       });
