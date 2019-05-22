@@ -45,7 +45,7 @@ export class TransactionOverviewComponent implements OnInit {
       .toPromise()
       .then(transactions => {
         transactions.forEach(transaction => {
-          if(transaction.earner.userId == this.signedInUser.userId){
+          if(transaction.earner.userId == this.signedInUser.userId) {
             this.allTransactions.push(transaction);
           }
         });
@@ -53,7 +53,7 @@ export class TransactionOverviewComponent implements OnInit {
         .toPromise()
         .then(transactions => {
           transactions.forEach(transaction =>{
-            if(transaction.redeemer.userId == this.signedInUser.userId){
+            if(transaction.redeemer.userId == this.signedInUser.userId) {
               this.allTransactions.push(transaction);
             }
           });
@@ -61,7 +61,7 @@ export class TransactionOverviewComponent implements OnInit {
           .toPromise()
           .then(transactions => {
             transactions.forEach(transaction =>{
-              if(transaction.trader.userId == this.signedInUser.userId){
+              if(transaction.trader.userId == this.signedInUser.userId) {
                 this.allTransactions.push(transaction);
               }
             });

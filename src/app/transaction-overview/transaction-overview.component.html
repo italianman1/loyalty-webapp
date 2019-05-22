@@ -51,7 +51,7 @@
           <tr *ngIf="transaction.$class.split('.')[1] == 'issueTokens'">
               <th scope="row">{{ transaction.$class.split('.')[1] }} </th>
               <td> nvt </td>
-              <td>{{ transaction.issuer.companyName}} </td>
+              <td>{{ transaction.issuer.userId}} </td>
               <td>{{ transaction.issuedTokens}} </td>
               <td><p class="text-danger"> {{ transaction.amountOfEuros}} </p></td>
               <td>{{ transaction.timestamp}} </td>
