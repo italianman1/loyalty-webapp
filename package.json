@@ -21,6 +21,7 @@
     "@angular/platform-browser-dynamic": "^7.2.12",
     "@angular/router": "^7.2.12",
     "core-js": "^2.5.4",
+    "d3": "^5.9.2",
     "mdn-polyfills": "^5.16.0",
     "rxjs": "~6.3.3",
     "rxjs-compat": "^6.4.0",
