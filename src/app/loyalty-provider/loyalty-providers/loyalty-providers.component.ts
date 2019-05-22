@@ -22,10 +22,13 @@ export class LoyaltyProvidersComponent implements OnInit {
 
   getProviders() {
     this.allProviders = this.loyaltyProviderService.getAllProviders();
+    this.allProviders.subscribe(providers => {
+      console.log(providers);
+    });
+
   }
 
   deleteProvider(id: string) {
-    console.log(id);
     this.loyaltyProviderService.deleteProvider(id)
     .toPromise()
     .then(() => {
