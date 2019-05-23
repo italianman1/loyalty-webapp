@@ -1,0 +1,35 @@
+<div *ngIf="signedInCustomer">
+  <div class="row">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Name</th>
+          <th scope="col">Conversion rate</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let provider of allProviders | async">
+          <th scope="row">{{ provider.userId }} </th>
+          <td>{{ provider.companyName }} </td>
+          <td>{{ provider.conversionRate }} </td>
+          <td *ngIf="checkIfJoined(provider)"><button type="button" (click)="deleteProvider(provider)" class="btn btn-outline-danger">Leave</button></td>
+          <td *ngIf="!checkIfJoined(provider)"><button type="button" (click)="joinProvider(provider)" class="btn btn-outline-success">Join</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <div class="row">
+    <p class="text-danger">{{ errorMessage }}</p>
+  </div>
+</div>
+
+<div class="container" *ngIf="!signedInCustomer">
+  <p>It seems that you haven't joined any of our amazing loyaly programs, join one by clicking this button:</p>
+  <a href="customer/join-program"><button type="button" class="btn btn-outline-success">Join program</button></a>
+</div>
+
+
+<router-outlet></router-outlet>

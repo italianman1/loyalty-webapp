@@ -1,0 +1,42 @@
+<div class="row">
+  <div class="col-12">
+      <a href="/loyalty-provider/add"><button type="button" class="btn btn-outline-success">Add provider</button></a>
+  </div>
+</div>
+
+<div class="row">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Name</th>
+        <th scope="col">Amount of partners</th>
+        <th scope="col">Amount of customers</th>
+        <th scope="col">Amount of issued tokens in euros</th>
+        <th scope="col">Amount of redeemed tokens in euros</th>
+        <th scope="col">Conversion rate</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let provider of allProviders | async">
+        <th scope="row">{{ provider.userId }}</th>
+        <td>{{ provider.companyName }}</td>
+        <td>{{ provider.partners.length}}</td>
+        <td>{{ provider.customers.length}}</td>
+        <td>{{ provider.amountOfIssuedTokensInEuros}}</td>
+        <td>{{ provider.amountOfRedeemedTokensInEuros}}</td>
+        <td>{{ provider.conversionRate}}</td>
+        <td><a href="/loyalty-provider/{{provider.userId}}/edit"><button type="button" class="btn btn-outline-primary">Update provider</button></a></td>
+        <td><button type="button" (click)="deleteProvider(provider.userId)" class="btn btn-outline-danger">Delete provider</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="row">
+  <p class="text-danger">{{ errorMessage }}</p>
+</div>
+
+<router-outlet></router-outlet>

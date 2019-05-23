@@ -1,0 +1,68 @@
+<div class="container" *ngIf="signedInCustomer && !clicked">
+    <form (ngSubmit)="onSubmit()" #performTransaction="ngForm">
+      <div class="form-group">
+        <label for="groceries">For how many euros do you want to buy groceries? </label>
+        <input type="number" class="form-control" id="groceries" required name="groceries" [(ngModel)]="amountOfGroceries" #groceries="ngModel">
+        <div [hidden]="amountOfGroceries" class="alert alert-danger">
+          Amount of euros is required
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="tokens">How much discount do you want? </label>
+        <div class="row">
+          <div class="col-2">
+              <input type="radio" value="0" name="discount" [(ngModel)]="amountOfDiscount"> 0
+          </div>
+
+          <div class="col-2">
+              <input type="radio" value="5" name="discount" [(ngModel)]="amountOfDiscount"> 5
+          </div>
+
+          <div class="col-2">
+              <input type="radio" value="10" name="discount" [(ngModel)]="amountOfDiscount"> 10
+          </div>
+
+          <div class="col-2">
+              <input type="radio" value="15" name="discount" [(ngModel)]="amountOfDiscount"> 15
+          </div>
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label>From which provider you would like to buy the groceries? </label>
+        <select class="form-control" id="retailer" required name="retailer" [(ngModel)]="selectedRetailerId" #customerProvider="ngModel">
+          <option *ngFor="let retailer of retailers" [value]="retailer.userId">{{retailer.companyName}}</option>
+        </select>
+        <div [hidden]="selectedRetailerId" class="alert alert-danger">
+          Retailer is required
+        </div>
+      </div>
+      
+      <button type="submit" class="btn btn-success" [disabled]="!performTransaction.form.valid">Perform transaction</button>
+      <button (click)="goBack()" class="btn btn-primary ml-2">Go back</button>
+    </form>
+
+
+    <!-- <div class="row">
+      <div class="col-4">
+        <button (click)="performOffer1()" class="btn btn-primary ml-2">Get 5 USB-sticks at the Action for 10 euros (before 50 euros) with the exchange of 10 loyalty points</button>
+      </div>
+      <div class="col-4">
+          <button (click)="performOffer2()" class="btn btn-primary ml-2">Get 2 lawnmowers at the Praxis for 100 euros (before 500 euros) with the exchange of 50 loyalty points</button>
+      </div>
+      <div class="col-4">
+          <button (click)="performOffer3()" class="btn btn-primary ml-2">Buy 2 wooden planks at the Praxis for 10 euros and receive 100 loyalty points</button>
+      </div>
+    </div> -->
+
+  </div>
+
+  <div class="container" *ngIf="clicked && errorMessage == ''">
+    <p class="text-danger">Please wait till your transaction is processed trough the system!</p>
+  </div>
+
+  <div class="container" *ngIf="clicked && errorMessage != ''">
+      <p class="text-danger"> {{ errorMessage }}, you're transaction could not be handled by the system</p>
+  </div>
+  
