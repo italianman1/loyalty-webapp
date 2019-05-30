@@ -23,23 +23,37 @@ export class SessionService {
     this.selectedTransaction = transaction;
   }
 
-  getSignedInUser(): Promise<any> {
+  getSignedInUser(filter?: string): Promise<any> {
     let userId = localStorage.getItem('signedInUser');
     let role = localStorage.getItem('signedInUserRole');
 
     if (role == 'Customer') {
+      if(filter == "minimal"){
+        return this.customerService.getCustomer(userId).toPromise();
+      }
       return this.customerService.getCustomer(userId, '{"include": "resolve"}').toPromise();
     }
 
     if (role == 'SolutionProvider') {
+      if(filter == "minimal"){
+        return this.solutionProviderService.getSolutionProvider(userId).toPromise();
+      }
+
       return this.solutionProviderService.getSolutionProvider(userId, '{"include": "resolve"}').toPromise();
     }
 
     if (role == 'Partner') {
+      if(filter == "minimal"){
+        return this.partnerService.getPartner(userId).toPromise();
+      }
+
       return this.partnerService.getPartner(userId, '{"include": "resolve"}').toPromise();
     }
 
     if (role == 'Provider') {
+      if(filter == "minimal"){
+        return this.loyaltyProviderService.getProvider(userId).toPromise();
+      }
       return this.loyaltyProviderService.getProvider(userId, '{"include": "resolve"}').toPromise();
     }
 
