@@ -5,6 +5,7 @@ import { AddLoyaltyProviderComponent } from './add-loyalty-provider/add-loyalty-
 import { EditLoyaltyProviderComponent } from './edit-loyalty-provider/edit-loyalty-provider.component';
 import { RegistrationOverviewComponent } from './registration-overview/registration-overview.component';
 import { PartnerOverviewComponent } from './partner-overview/partner-overview.component';
+import { ChangeConversionrateComponent } from './change-conversionrate/change-conversionrate.component';
 
 const routes: Routes = [
   { path: 'loyalty-provider', component: LoyaltyProvidersComponent },
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'loyalty-provider/:providerId/edit', component: EditLoyaltyProviderComponent},
   { path: 'loyalty-provider/registrations', component: RegistrationOverviewComponent},
   { path: 'loyalty-provider/partner-overview', component: PartnerOverviewComponent},
+  { path: 'loyalty-provider/change-conversionrate', component: ChangeConversionrateComponent},
 ];
 
 @NgModule({

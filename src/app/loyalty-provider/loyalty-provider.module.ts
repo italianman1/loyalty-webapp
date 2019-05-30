@@ -7,6 +7,7 @@ import { LoyaltyProvidersComponent } from './loyalty-providers/loyalty-providers
 import { FormsModule } from '@angular/forms';
 import { RegistrationOverviewComponent } from './registration-overview/registration-overview.component';
 import { PartnerOverviewComponent } from './partner-overview/partner-overview.component';
+import { ChangeConversionrateComponent } from './change-conversionrate/change-conversionrate.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { PartnerOverviewComponent } from './partner-overview/partner-overview.co
     LoyaltyProvidersComponent,
     RegistrationOverviewComponent,
     PartnerOverviewComponent,
+    ChangeConversionrateComponent
   ],
   imports: [
     CommonModule,
