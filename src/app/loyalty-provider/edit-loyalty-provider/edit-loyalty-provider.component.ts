@@ -16,6 +16,10 @@ export class EditLoyaltyProviderComponent implements OnInit {
 
   constructor(private loyaltyProviderService: LoyaltyproviderService, private route: ActivatedRoute, 
               private router: Router, private location: Location) {
+    
+  }
+
+  ngOnInit() {
     this.providerId = this.route.snapshot.paramMap.get('providerId').valueOf();
     this.loyaltyProviderService.getProvider(this.providerId)
     .toPromise()
@@ -29,10 +33,6 @@ export class EditLoyaltyProviderComponent implements OnInit {
         this.errorMessage = error;
       }
     });
-  }
-
-  ngOnInit() {
-  
   }
 
   onSubmit(): void {

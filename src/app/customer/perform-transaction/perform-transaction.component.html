@@ -30,7 +30,7 @@
       </div>
   
       <div class="form-group">
-        <label>From which provider you would like to buy the groceries? </label>
+        <label>From which retailer you would like to buy the groceries? </label>
         <select class="form-control" id="retailer" required name="retailer" [(ngModel)]="selectedRetailerId" #customerProvider="ngModel">
           <option *ngFor="let retailer of retailers" [value]="retailer.userId">{{retailer.companyName}}</option>
         </select>
