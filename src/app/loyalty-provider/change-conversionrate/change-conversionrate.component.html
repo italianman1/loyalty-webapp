@@ -1,0 +1,24 @@
+<div class="container">
+  <h1>Edit conversation rate</h1>
+<div class="row">
+  <form (ngSubmit)="onSubmit()" #editConversionRate="ngForm">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name" required name="name" disabled="true" [(ngModel)]="signedInProvider.companyName" #providerName="ngModel">
+    </div>
+
+    <div class="form-group">
+        <label for="name">Email</label>
+        <input type="text" class="form-control" id="email" required name="email" disabled="true" [(ngModel)]="signedInProvider.email" #providerEmail="ngModel">
+    </div>
+
+    <div class="form-group">
+      <label for="conversion_rate">Conversion rate</label>
+      <input type="number" class="form-control" id="conversion_rate" required name="conversion_rate" [(ngModel)]="signedInProvider.conversionRate" #providerConversionRate="ngModel">
+    </div>
+
+    <button type="submit" class="btn btn-success" [disabled]="!editConversionRate.form.valid">Submit</button>
+    <button (click)="goBack()" class="btn btn-primary ml-2">Go back</button>
+  </form>
+</div>
+</div>

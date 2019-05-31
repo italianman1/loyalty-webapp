@@ -3,28 +3,26 @@ import { LoyaltyproviderService } from 'src/app/services/loyaltyprovider.service
 import { LoyaltyProvider } from 'src/app/models/loyaltynetwork';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { SessionService } from 'src/app/services/session.service';
 
 @Component({
-  selector: 'app-edit-loyalty-provider',
-  templateUrl: './edit-loyalty-provider.component.html',
-  styleUrls: ['./edit-loyalty-provider.component.css']
+  selector: 'app-change-conversionrate',
+  templateUrl: './change-conversionrate.component.html',
+  styleUrls: ['./change-conversionrate.component.css']
 })
-export class EditLoyaltyProviderComponent implements OnInit {
-  providerToEdit: LoyaltyProvider = new LoyaltyProvider();
+export class ChangeConversionrateComponent implements OnInit {
+  signedInProvider: LoyaltyProvider;
   providerId: string;
   errorMessage: string;
 
   constructor(private loyaltyProviderService: LoyaltyproviderService, private route: ActivatedRoute, 
-              private router: Router, private location: Location) {
-    
+              private router: Router, private location: Location, private sessionService: SessionService) {
   }
 
   ngOnInit() {
-    this.providerId = this.route.snapshot.paramMap.get('providerId').valueOf();
-    this.loyaltyProviderService.getProvider(this.providerId)
-    .toPromise()
+    this.sessionService.getSignedInUser("minimal")
     .then(result => {
-      this.providerToEdit = result;
+      this.signedInProvider = result;
     })
     .catch((error) => {
       if (error === 'Server error') {
@@ -36,7 +34,8 @@ export class EditLoyaltyProviderComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.loyaltyProviderService.updateProvider(this.providerToEdit)
+    console.log(this.signedInProvider);
+    this.loyaltyProviderService.updateProvider(this.signedInProvider)
     .toPromise()
     .then(() => {
       this.router.navigateByUrl('loyalty-provider');
@@ -48,7 +47,6 @@ export class EditLoyaltyProviderComponent implements OnInit {
         this.errorMessage = error;
       }
     });
-   
   }
 
   goBack(): void {

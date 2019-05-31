@@ -12,8 +12,8 @@
         <th scope="col">Name</th>
         <th scope="col">Amount of partners</th>
         <th scope="col">Amount of customers</th>
-        <th scope="col">Amount of issued tokens in euros</th>
-        <th scope="col">Amount of redeemed tokens in euros</th>
+        <!-- <th scope="col">Amount of issued tokens in euros</th>
+        <th scope="col">Amount of redeemed tokens in euros</th> -->
         <th scope="col">Conversion rate</th>
         <th></th>
         <th></th>
@@ -25,8 +25,8 @@
         <td>{{ provider.companyName }}</td>
         <td>{{ provider.partners.length}}</td>
         <td>{{ provider.customers.length}}</td>
-        <td>{{ provider.amountOfIssuedTokensInEuros}}</td>
-        <td>{{ provider.amountOfRedeemedTokensInEuros}}</td>
+        <!-- <td>{{ provider.amountOfIssuedTokensInEuros}}</td>
+        <td>{{ provider.amountOfRedeemedTokensInEuros}}</td> -->
         <td>{{ provider.conversionRate}}</td>
         <td><a href="/loyalty-provider/{{provider.userId}}/edit"><button type="button" class="btn btn-outline-primary">Update provider</button></a></td>
         <td><button type="button" (click)="deleteProvider(provider.userId)" class="btn btn-outline-danger">Delete provider</button></td>
