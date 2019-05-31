@@ -47,7 +47,7 @@ export class PerformTransactionComponent implements OnInit {
   }
 
   getUser() {
-    this.sessionService.getSignedInUser()
+    this.sessionService.getSignedInUser("minimal")
     .then(user => {
       this.signedInCustomer = user;
     });

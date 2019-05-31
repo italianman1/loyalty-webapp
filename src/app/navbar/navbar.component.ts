@@ -27,7 +27,7 @@ export class NavbarComponent implements OnInit {
   }
 
   getUser() {
-    this.sessionService.getSignedInUser()
+    this.sessionService.getSignedInUser("minimal")
     .then(user => {
       if (user) {
         this.signedInUser = user;
