@@ -32,7 +32,6 @@ export class PerformTransactionComponent implements OnInit {
   ngOnInit() {
    this.getProvidersAndPartners();
    this.getUser();
-   console.log(this.retailers);
   }
 
   getProvidersAndPartners() {
@@ -43,6 +42,7 @@ export class PerformTransactionComponent implements OnInit {
           this.retailers.push(partner);
         });
       });
+      console.log(this.retailers);
     });
   }
 
@@ -130,9 +130,10 @@ export class PerformTransactionComponent implements OnInit {
     if(retailer.role == "Partner") {
       this.redeemTransaction = {
         $class: 'loyaltynetwork.redeemTokens',
-        accepter: 'resource:loyaltynetwork.LoyaltyPartner#' + encodeURI(retailer.userId),
+        accepter: 'resource:loyaltynetwork.LoyaltyProvider#' + encodeURI(retailer.provider.userId),
         redeemer: 'resource:loyaltynetwork.Customer#' + encodeURI(this.signedInCustomer.userId),
-        amountOfDiscount: parseInt(this.amountOfDiscount, 10)
+        amountOfDiscount: parseInt(this.amountOfDiscount, 10),
+        partnerStore: retailer.companyName
       };
     }
 
@@ -141,7 +142,8 @@ export class PerformTransactionComponent implements OnInit {
         $class: 'loyaltynetwork.redeemTokens',
         accepter: 'resource:loyaltynetwork.LoyaltyProvider#' + encodeURI(retailer.userId),
         redeemer: 'resource:loyaltynetwork.Customer#' + encodeURI(this.signedInCustomer.userId),
-        amountOfDiscount: parseInt(this.amountOfDiscount, 10)
+        amountOfDiscount: parseInt(this.amountOfDiscount, 10),
+        partnerStore: 'nvt'
       };
     }
 
@@ -155,8 +157,9 @@ export class PerformTransactionComponent implements OnInit {
       this.earnTransaction = {
         $class: 'loyaltynetwork.earnTokens',
         earner: 'resource:loyaltynetwork.Customer#' + encodeURI(this.signedInCustomer.userId),
-        issuer: 'resource:loyaltynetwork.LoyaltyPartner#' + encodeURI(retailer.userId),
-        amountOfEuros: (this.amountOfGroceries - this.amountOfDiscount)
+        issuer: 'resource:loyaltynetwork.LoyaltyProvider#' + encodeURI(retailer.provider.userId),
+        amountOfEuros: (this.amountOfGroceries - this.amountOfDiscount),
+        partnerStore: retailer.companyName
       };
     }
 
@@ -165,7 +168,8 @@ export class PerformTransactionComponent implements OnInit {
         $class: 'loyaltynetwork.earnTokens',
         earner: 'resource:loyaltynetwork.Customer#' + encodeURI(this.signedInCustomer.userId),
         issuer: 'resource:loyaltynetwork.LoyaltyProvider#' + encodeURI(retailer.userId),
-        amountOfEuros: (this.amountOfGroceries - this.amountOfDiscount)
+        amountOfEuros: (this.amountOfGroceries - this.amountOfDiscount),
+        partnerStore: 'nvt',
       };
     }
     console.log(this.earnTransaction);
